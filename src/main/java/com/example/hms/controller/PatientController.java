@@ -11,15 +11,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.hms.model.Patient;
+import com.example.hms.model.Treatment;
 import com.example.hms.service.PatientService;
 
 @RestController
 @RequestMapping("/api/v1/patient/")
 public class PatientController {
 	private PatientService patientService;
+
 	
 	public PatientController(PatientService patientService) {
 		this.patientService = patientService;
@@ -58,6 +61,29 @@ public class PatientController {
 		patientService.deletePatient(id);
 		
 		return new ResponseEntity<Patient>(HttpStatus.OK);
+	}
+	
+	@PostMapping("/add/treatment/{id}")
+	public ResponseEntity<Treatment> addTreatmentToPatient(
+			@RequestParam Patient patient,
+			@PathVariable("id") Long id) {
+		patientService.addTreatmentToPatient(patient, id);
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/add/treatments/{id}")
+	public ResponseEntity<Treatment> addTreatmentstoPatient(
+			@RequestParam List<Treatment> treatments,
+			@PathVariable("id") Long id ) {
+		patientService.addTreatmentstoPatient(treatments, id);
+		return new ResponseEntity<Treatment>(HttpStatus.OK);
+	}
+	
+	@GetMapping("/find/treatments/{id}")
+	public ResponseEntity<List<Treatment>> findTreatmentsofPatientByPatientId(@PathVariable("id") Long id) {
+		List<Treatment> treatments = patientService.findTreatmentsofPatientByPatientId(id);
+		
+		return new ResponseEntity<>(treatments, HttpStatus.OK);
 	}
 	
 	

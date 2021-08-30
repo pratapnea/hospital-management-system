@@ -52,17 +52,24 @@ public class PatientService {
 	}
 	
 	// add treatment to a patient
-	public void addTreatmentToPatient(Long treatmentId, Long patientId) {
+//	public void addTreatmentToPatient(Long treatmentId, Long patientId) {
+//		Treatment treatment = treatmentRepository.findById(treatmentId)
+//				.orElseThrow(() -> new TreatmentNotFoundException("Treatment Not Found!"));
+//			
+//		Patient patient = findPatientById(patientId);
+//		
+//		patient.getTreatment().add(treatment);
+//		addPatient(patient);
+//		
+//	}
+	
+	public void addTreatmentToPatient(Patient patient, Long treatmentId) {
 		Treatment treatment = treatmentRepository.findById(treatmentId)
 				.orElseThrow(() -> new TreatmentNotFoundException("Treatment Not Found!"));
-			
-		Patient patient = findPatientById(patientId);
 		
 		patient.getTreatment().add(treatment);
 		addPatient(patient);
-		
 	}
-	 
 	
 	// add treatments to a patients
 	public void addTreatmentstoPatient(List<Treatment> treatments, Long patientId) {

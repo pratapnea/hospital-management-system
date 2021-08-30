@@ -1,10 +1,14 @@
 package com.example.hms.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,17 +28,24 @@ public class MedicalPerson implements Serializable {
 	private Long id;
 	private String firstName;
 	private String lastName;
+	
+	@Enumerated(EnumType.STRING)
 	private MedicalTitle title;
+	
 	private String address;
 	private String qualification;
 	private String specialization;
 	private String phone;
 	private String email;
+	
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
+	
 	@Column(nullable = false, updatable = false)
 	private String codeNumber;
-	@ManyToMany
-	private List<Patient> patients;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Patient> patients = new ArrayList<>();
 	
 	public MedicalPerson() {}
 	

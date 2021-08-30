@@ -1,14 +1,18 @@
 package com.example.hms.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Patient implements Serializable{
@@ -26,10 +30,15 @@ public class Patient implements Serializable{
 	private String lastNaame;
 	private String address;
 	private int age;
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	private String phone;
-	@OneToMany
-	private List<Treatment> treatment;
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	private List<Treatment> treatment = new ArrayList<>();
+	
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "patients")
+	private List<MedicalPerson> medicalPerson;
 	
 	
 	public Patient() {}
@@ -123,6 +132,16 @@ public class Patient implements Serializable{
 
 	public void setTreatment(List<Treatment> treatment) {
 		this.treatment = treatment;
+	}
+
+
+	public List<MedicalPerson> getMedicalPerson() {
+		return medicalPerson;
+	}
+
+
+	public void setMedicalPerson(List<MedicalPerson> medicalPerson) {
+		this.medicalPerson = medicalPerson;
 	}
 	
 	

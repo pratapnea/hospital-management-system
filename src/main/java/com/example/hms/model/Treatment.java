@@ -1,10 +1,14 @@
 package com.example.hms.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Treatment {
@@ -14,6 +18,9 @@ public class Treatment {
 	@Column(nullable = false, updatable = false)
 	private Long id;
 	private String treatmentType;
+	
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "treatment")
+	private List<Patient> patients;
 	
 	public Treatment() {}
 	
@@ -37,6 +44,16 @@ public class Treatment {
 	public void setTreatmentType(String treatmentType) {
 		this.treatmentType = treatmentType;
 	}
+
+	public List<Patient> getPatients() {
+		return patients;
+	}
+
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
+	
+	
 	
 	
 	

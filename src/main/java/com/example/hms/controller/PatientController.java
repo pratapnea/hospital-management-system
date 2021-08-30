@@ -33,7 +33,7 @@ public class PatientController {
 	}
 	
 	@GetMapping("/find/{id}")
-	public ResponseEntity<Patient> getPatientById(@PathVariable("id") Lond id) {
+	public ResponseEntity<Patient> getPatientById(@PathVariable("id") Long id) {
 		Patient patient = patientService.findPatientById(id);
 		
 		return new ResponseEntity<Patient>(patient,HttpStatus.OK);

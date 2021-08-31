@@ -39,6 +39,9 @@ public class PatientRecordService {
 	
 	// delete patient record
 	public void deletePatientRecord(Long id) {
+		if(!patientRecordRepository.existsById(id)) {
+			throw new PatientRecordNotFoundException("Patient Record Not Found!");
+		}
 		patientRecordRepository.deleteById(id);
 	}
 	

@@ -8,20 +8,12 @@ import org.springframework.stereotype.Service;
 import com.example.hms.exception.PatientNotFoundException;
 import com.example.hms.model.Patient;
 import com.example.hms.repository.PatientRepository;
-import com.example.hms.repository.TreatmentRepository;
 
 @Service
 public class PatientService {
-	private PatientRepository patientRepository;
-	private TreatmentRepository treatmentRepository;
 	
 	@Autowired
-	public PatientService(PatientRepository patientRepository, 
-						  TreatmentRepository treatmentRepository) {
-		this.patientRepository = patientRepository;
-		this.treatmentRepository = treatmentRepository;
-	}
-	
+	private PatientRepository patientRepository;
 	
 	// add patient
 	public Patient addPatient(Patient patient) {
@@ -46,6 +38,9 @@ public class PatientService {
 	
 	// delete patient
 	public void deletePatient(Long id) {
+		if(!patientRepository.existsById(id)) {
+			throw new PatientNotFoundException("Patient Not Found!");
+		}
 		patientRepository.deleteById(id);
 	}
 	

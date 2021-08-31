@@ -42,6 +42,9 @@ public class TreatmentService {
 	
 	// delete treatment
 	public void deleteTreatment(Long id) {
+		if(!treatmentRepository.existsById(id)) {
+			throw new TreatmentNotFoundException("Treatment Not Found!");
+		}
 		treatmentRepository.deleteById(id);
 	}
 	

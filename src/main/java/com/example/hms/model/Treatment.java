@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Treatment {
@@ -19,8 +20,8 @@ public class Treatment {
 	private Long id;
 	private String treatmentType;
 	
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "treatment")
-	private List<Patient> patients;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "treatment")
+	private List<PatientRecord> patientRecords;
 	
 	public Treatment() {}
 	
@@ -45,14 +46,13 @@ public class Treatment {
 		this.treatmentType = treatmentType;
 	}
 
-	public List<Patient> getPatients() {
-		return patients;
+	public List<PatientRecord> getPatientRecords() {
+		return patientRecords;
 	}
 
-	public void setPatients(List<Patient> patients) {
-		this.patients = patients;
+	public void setPatientRecords(List<PatientRecord> patientRecords) {
+		this.patientRecords = patientRecords;
 	}
-	
 	
 	
 	

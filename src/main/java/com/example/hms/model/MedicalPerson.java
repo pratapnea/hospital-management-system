@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class MedicalPerson implements Serializable {
@@ -44,8 +45,8 @@ public class MedicalPerson implements Serializable {
 	@Column(nullable = false, updatable = false)
 	private String codeNumber;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<Patient> patients = new ArrayList<>();
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "medicalPerson")
+	private List<PatientRecord> patientsRecords;
 	
 	public MedicalPerson() {}
 	
@@ -152,13 +153,14 @@ public class MedicalPerson implements Serializable {
 		this.codeNumber = codeNumber;
 	}
 
-	public List<Patient> getPatients() {
-		return patients;
+	public List<PatientRecord> getPatientsRecords() {
+		return patientsRecords;
 	}
 
-	public void setPatients(List<Patient> patients) {
-		this.patients = patients;
-	}	
+	public void setPatientsRecords(List<PatientRecord> patientsRecords) {
+		this.patientsRecords = patientsRecords;
+	}
+
 	
 	
 }

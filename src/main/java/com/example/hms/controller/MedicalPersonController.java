@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.hms.model.MedicalPerson;
-import com.example.hms.model.Patient;
 import com.example.hms.service.MedicalPersonService;
 
+import io.swagger.annotations.Api;
+
+@Api
 @RestController
 @RequestMapping("/api/v1/medical-person/")
 public class MedicalPersonController {
@@ -61,22 +63,22 @@ public class MedicalPersonController {
 		return new ResponseEntity<MedicalPerson>(HttpStatus.OK);
 	}
 	
-	@PostMapping("/{mpId}/add/patient/{id}")
-	public ResponseEntity<MedicalPerson> addPatientToMedicalPerson(
-			@PathVariable("MpId") Long medicalPersonId,
-			@PathVariable("id") Long patientId) {
-		medicalPersonService.addPatientToMedicalPerson(patientId, medicalPersonId);
-		
-		return new ResponseEntity<MedicalPerson>(HttpStatus.OK);
-	}
-	
-	@GetMapping("/find/{id}")
-	public ResponseEntity<List<Patient>> getPatientsOfMedicalPersonByMPId(@PathVariable("id") Long id) {
-		List<Patient> patients = medicalPersonService.findPatientsOfMedicalPersonByMPId(id);
-		
-		return new ResponseEntity<>(patients, HttpStatus.OK);
-	}
-	
+//	@PostMapping("/{mpId}/add/patient/{id}")
+//	public ResponseEntity<MedicalPerson> addPatientToMedicalPerson(
+//			@PathVariable("MpId") Long medicalPersonId,
+//			@PathVariable("id") Long patientId) {
+//		medicalPersonService.addPatientToMedicalPerson(patientId, medicalPersonId);
+//		
+//		return new ResponseEntity<MedicalPerson>(HttpStatus.OK);
+//	}
+//	
+//	@GetMapping("/find/{id}")
+//	public ResponseEntity<List<Patient>> getPatientsOfMedicalPersonByMPId(@PathVariable("id") Long id) {
+//		List<Patient> patients = medicalPersonService.findPatientsOfMedicalPersonByMPId(id);
+//		
+//		return new ResponseEntity<>(patients, HttpStatus.OK);
+//	}
+//	
 	
 	
 	

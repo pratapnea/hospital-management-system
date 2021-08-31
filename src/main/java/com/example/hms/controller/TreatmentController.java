@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.hms.model.Treatment;
 import com.example.hms.service.TreatmentService;
 
+import io.swagger.annotations.Api;
+@Api
 @RestController
 @RequestMapping("/api/v1/treatment/")
 public class TreatmentController {

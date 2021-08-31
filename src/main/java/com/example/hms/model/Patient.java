@@ -13,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Patient implements Serializable{
@@ -34,11 +35,8 @@ public class Patient implements Serializable{
 	private Gender gender;
 	private String phone;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<Treatment> treatment = new ArrayList<>();
-	
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "patients")
-	private List<MedicalPerson> medicalPerson;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "patient")
+	private List<PatientRecord> patientRecords = new ArrayList<>();
 	
 	
 	public Patient() {}
@@ -125,24 +123,17 @@ public class Patient implements Serializable{
 	}
 
 
-	public List<Treatment> getTreatment() {
-		return treatment;
+	public List<PatientRecord> getPatientRecords() {
+		return patientRecords;
 	}
 
 
-	public void setTreatment(List<Treatment> treatment) {
-		this.treatment = treatment;
+	public void setPatientRecords(List<PatientRecord> patientRecords) {
+		this.patientRecords = patientRecords;
 	}
 
 
-	public List<MedicalPerson> getMedicalPerson() {
-		return medicalPerson;
-	}
 
-
-	public void setMedicalPerson(List<MedicalPerson> medicalPerson) {
-		this.medicalPerson = medicalPerson;
-	}
 	
 	
 

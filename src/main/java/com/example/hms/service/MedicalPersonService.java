@@ -25,7 +25,11 @@ public class MedicalPersonService {
 
 	// find all medical person
 	public List<MedicalPerson> findAllMedicalPerson() {
-		return medicalPersonRepository.findAll();
+		List<MedicalPerson> medicalPersons = medicalPersonRepository.findAll();
+		if(medicalPersons.isEmpty()) {
+			throw new MedicalPersonNotFoundException("We don't have any medical person at the moment!");
+		}
+		return medicalPersons;
 	}
 
 	// find medical person by id

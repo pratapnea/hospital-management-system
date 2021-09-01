@@ -22,7 +22,11 @@ public class PatientRecordService {
 	
 	// find all patient records
 	public List<PatientRecord> findAllPatientRecords(){
-		return patientRecordRepository.findAll();
+		List<PatientRecord> patientRecords =  patientRecordRepository.findAll();
+		if(patientRecords.isEmpty()) {
+			throw new PatientRecordNotFoundException("We don't have any records to display at the moment!");
+		}
+		return patientRecords;
 	}
 	
 	// find patient records by id

@@ -25,7 +25,11 @@ public class TreatmentService {
 	
 	// find all treatment
 	public List<Treatment> findAllTreatment() {
-		return treatmentRepository.findAll();
+		List<Treatment> treatment = treatmentRepository.findAll();
+		if(treatment.isEmpty()) {
+			throw new TreatmentNotFoundException("We don't have any treatments right now!");
+		}
+		return treatment;
 	}
 	
 	// find treatment by id

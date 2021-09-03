@@ -1,4 +1,4 @@
-package com.example.hms.model;
+package com.example.hms.utils;
 
 public enum Gender {
 	MALE(1), FEMALE(2), OTHER(3);

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.hms.model.Treatment;
@@ -42,6 +43,7 @@ public class TreatmentController {
 	}
 	
 	@PostMapping("/add")
+	@ResponseStatus(value = HttpStatus.CREATED)
 	public ResponseEntity<Treatment> addTreatment(@RequestBody Treatment treatment) {
 		Treatment newTreatment = treatmentService.addTreatment(treatment);
 		return new ResponseEntity<Treatment>(newTreatment, HttpStatus.CREATED);
@@ -53,7 +55,7 @@ public class TreatmentController {
 		return new ResponseEntity<Treatment>(updateTreatment, HttpStatus.OK);
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Treatment> deleteTreatment(@PathVariable("id") Long id) {
 		treatmentService.deleteTreatment(id);
 		return new ResponseEntity<Treatment>(HttpStatus.OK);

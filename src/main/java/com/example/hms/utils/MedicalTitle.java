@@ -1,4 +1,4 @@
-package com.example.hms.model;
+package com.example.hms.utils;
 
 public enum MedicalTitle {
 	DOCTOR(1), NURSE(2), CARE_TAKER(2);
